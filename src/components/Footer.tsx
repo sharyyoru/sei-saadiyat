@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 
 export function Footer() {
@@ -9,13 +10,15 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <Image
-              src="/images/sei_saadiyat_logo_light_en.webp"
-              alt="SEI Saadiyat"
-              width={140}
-              height={50}
-              className="mb-6 h-10 w-auto"
-            />
+            <Link href="/">
+              <Image
+                src="/images/sei_saadiyat_logo_light_en.webp"
+                alt="SEI Saadiyat"
+                width={140}
+                height={50}
+                className="mb-6 h-10 w-auto"
+              />
+            </Link>
             <p className="text-white/50 text-sm leading-relaxed">
               SEI Saadiyat by Aldar - A sanctuary of refined living on Abu
               Dhabi&apos;s most prestigious island.
@@ -26,34 +29,34 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3 text-white/50">
               <li>
-                <a href="#about" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/#about" className="hover:text-[#c9a962] transition-colors">
                   About SEI
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#units" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/#units" className="hover:text-[#c9a962] transition-colors">
                   Residences
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#payment" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/#payment" className="hover:text-[#c9a962] transition-colors">
                   Payment Plan
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#location" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/#location" className="hover:text-[#c9a962] transition-colors">
                   Location
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#register" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/#register" className="hover:text-[#c9a962] transition-colors">
                   Register Interest
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/blog" className="hover:text-[#c9a962] transition-colors">
+                <Link href="/blog" className="hover:text-[#c9a962] transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -85,15 +88,15 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
             <p>© {new Date().getFullYear()} Aldar Properties. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-[#c9a962] transition-colors">
+              <Link href="/privacy-policy" className="hover:text-[#c9a962] transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="hover:text-[#c9a962] transition-colors">
+              </Link>
+              <Link href="/terms-of-use" className="hover:text-[#c9a962] transition-colors">
                 Terms of Use
-              </a>
-              <a href="#" className="hover:text-[#c9a962] transition-colors">
+              </Link>
+              <Link href="/cookie-policy" className="hover:text-[#c9a962] transition-colors">
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
           <p className="text-xs text-white/30 mt-6 text-center">
