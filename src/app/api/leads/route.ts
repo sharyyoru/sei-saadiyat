@@ -8,7 +8,7 @@ const leadSchema = z.object({
   full_name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(8, 'Phone number is required'),
-  country: z.string().min(1, 'Country is required'),
+  country: z.string().optional().default('Not specified'),
   budget_range: z.string().optional(),
   preferred_unit: z.string().optional(),
   purchase_timeline: z.string().optional(),

@@ -4,10 +4,22 @@ import { useState } from 'react';
 import { ArrowRight, CheckCircle, Gift } from 'lucide-react';
 import { Button } from './ui/Button';
 
+const countries = [
+  'United Arab Emirates',
+  'Saudi Arabia',
+  'Qatar',
+  'Kuwait',
+  'India',
+  'United Kingdom',
+  'United States',
+  'Other',
+];
+
 export function BlogLeadCapture() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -25,6 +37,7 @@ export function BlogLeadCapture() {
           full_name: name,
           email,
           phone,
+          country: country || 'Not specified',
           lead_source: 'blog_sidebar',
         }),
       });
@@ -94,6 +107,16 @@ export function BlogLeadCapture() {
           required
           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/40 focus:outline-none focus:border-[#c9a962] transition-colors"
         />
+        <select
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#c9a962] transition-colors"
+        >
+          <option value="" className="bg-[#0a0a0a]">Select Country</option>
+          {countries.map((c) => (
+            <option key={c} value={c} className="bg-[#0a0a0a]">{c}</option>
+          ))}
+        </select>
         
         {error && (
           <p className="text-red-400 text-sm">{error}</p>
