@@ -4,6 +4,7 @@ import { ValueBar } from "@/components/ValueBar";
 import { AboutSection } from "@/components/AboutSection";
 import { UnitTypes } from "@/components/UnitTypes";
 import { Gallery } from "@/components/Gallery";
+import { Amenities } from "@/components/Amenities";
 import { PaymentPlan } from "@/components/PaymentPlan";
 import { Location } from "@/components/Location";
 import { Developer } from "@/components/Developer";
@@ -111,6 +112,7 @@ export default function Home() {
           <AboutSection />
           <UnitTypes />
           <Gallery />
+          <Amenities />
           <PaymentPlan />
           <Location />
           <Developer />
