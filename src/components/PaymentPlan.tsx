@@ -17,15 +17,53 @@ const unitPrices = [
 ];
 
 const paymentMilestones = [
-  { milestone: 'Booking', date: 'On Booking', percentage: 5, phase: 'construction' },
-  { milestone: 'Installment 2', date: 'Mar 2027', percentage: 5, phase: 'construction' },
-  { milestone: 'Installment 3', date: 'Sep 2027', percentage: 5, phase: 'construction' },
-  { milestone: 'Installment 4', date: 'Apr 2028', percentage: 10, phase: 'construction' },
-  { milestone: 'Installment 5', date: 'Dec 2028', percentage: 10, phase: 'construction' },
-  { milestone: 'Installment 6', date: 'Aug 2029', percentage: 10, phase: 'construction' },
-  { milestone: 'Installment 7', date: 'Apr 2030', percentage: 5, phase: 'construction' },
-  { milestone: 'On Handover', date: '2030', percentage: 50, phase: 'handover' },
+  { milestone: 'Booking', date: 'On Booking', dateObj: new Date('2026-09-16'), percentage: 5, phase: 'construction' },
+  { milestone: 'Installment 2', date: 'Mar 2027', dateObj: new Date('2027-03-01'), percentage: 5, phase: 'construction' },
+  { milestone: 'Installment 3', date: 'Sep 2027', dateObj: new Date('2027-09-01'), percentage: 5, phase: 'construction' },
+  { milestone: 'Installment 4', date: 'Apr 2028', dateObj: new Date('2028-04-01'), percentage: 10, phase: 'construction' },
+  { milestone: 'Installment 5', date: 'Dec 2028', dateObj: new Date('2028-12-01'), percentage: 10, phase: 'construction' },
+  { milestone: 'Installment 6', date: 'Aug 2029', dateObj: new Date('2029-08-01'), percentage: 10, phase: 'construction' },
+  { milestone: 'Installment 7', date: 'Apr 2030', dateObj: new Date('2030-04-01'), percentage: 5, phase: 'construction' },
+  { milestone: 'On Handover', date: 'Q4 2030', dateObj: new Date('2030-12-01'), percentage: 50, phase: 'handover' },
 ];
+
+function getPaymentStatus(dateObj: Date): 'completed' | 'current' | 'upcoming' {
+  const now = new Date();
+  const threeMonthsFromNow = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+  
+  if (dateObj < now) return 'completed';
+  if (dateObj <= threeMonthsFromNow) return 'current';
+  return 'upcoming';
+}
+
+function getTimeUntil(dateObj: Date): string {
+  const now = new Date();
+  const diff = dateObj.getTime() - now.getTime();
+  
+  if (diff < 0) return 'Completed';
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
+  
+  if (years > 0) return `${years}y ${months % 12}m`;
+  if (months > 0) return `${months} months`;
+  return `${days} days`;
+}
+
+function getProgressPercentage(): number {
+  const now = new Date();
+  const start = new Date('2026-09-16');
+  const end = new Date('2030-12-01');
+  
+  if (now < start) return 0;
+  if (now > end) return 100;
+  
+  const total = end.getTime() - start.getTime();
+  const current = now.getTime() - start.getTime();
+  
+  return Math.round((current / total) * 100);
+}
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat('en-AE', {
@@ -190,7 +228,10 @@ export function PaymentPlan() {
                 <div className="w-10 h-10 rounded-full bg-[#c9a962]/20 flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-[#c9a962]" />
                 </div>
-                <h3 className="text-xl font-semibold">Payment Timeline</h3>
+                <div>
+                  <h3 className="text-xl font-semibold">Payment Timeline</h3>
+                  <p className="text-white/40 text-sm">Dynamic progress based on current date</p>
+                </div>
               </div>
               
               {/* Phase Filter */}
@@ -211,18 +252,30 @@ export function PaymentPlan() {
               </div>
             </div>
 
-            {/* Progress Bar */}
+            {/* Dynamic Progress Bar */}
             <div className="relative mb-8">
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div className="h-3 bg-white/10 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-[#c9a962] to-white rounded-full transition-all duration-500"
-                  style={{ width: `${constructionTotal}%` }}
-                />
+                  className="h-full bg-gradient-to-r from-[#c9a962] via-[#c9a962] to-white/50 rounded-full transition-all duration-1000 relative"
+                  style={{ width: `${getProgressPercentage()}%` }}
+                >
+                  {/* Animated pulse at end */}
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full animate-pulse" />
+                </div>
               </div>
-              <div className="flex justify-between mt-2 text-xs text-white/40">
-                <span>Start</span>
-                <span>Construction 50%</span>
-                <span>Handover 100%</span>
+              <div className="flex justify-between mt-3 text-xs">
+                <div>
+                  <span className="text-[#c9a962] font-semibold">Sep 2026</span>
+                  <span className="text-white/40 ml-1">Start</span>
+                </div>
+                <div className="text-center">
+                  <span className="text-white font-semibold">{getProgressPercentage()}%</span>
+                  <span className="text-white/40 ml-1">Progress</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-white/40">Handover</span>
+                  <span className="text-white font-semibold ml-1">Q4 2030</span>
+                </div>
               </div>
             </div>
 
@@ -230,42 +283,128 @@ export function PaymentPlan() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {paymentMilestones
                 .filter(m => activePhase === 'all' || m.phase === activePhase)
-                .map((item, index) => (
-                  <div
-                    key={index}
-                    className={`group relative p-5 rounded-xl border transition-all duration-300 hover:scale-[1.02] cursor-pointer ${
-                      item.phase === 'handover'
-                        ? 'bg-white/10 border-white/20 hover:border-white/40'
-                        : 'bg-[#c9a962]/5 border-[#c9a962]/20 hover:border-[#c9a962]/50'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <span className={`text-xs font-semibold uppercase tracking-wider ${
-                        item.phase === 'handover' ? 'text-white/50' : 'text-[#c9a962]'
+                .map((item, index) => {
+                  const status = getPaymentStatus(item.dateObj);
+                  const timeUntil = getTimeUntil(item.dateObj);
+                  
+                  return (
+                    <div
+                      key={index}
+                      className={`group relative p-5 rounded-xl border transition-all duration-300 hover:scale-[1.02] cursor-pointer ${
+                        status === 'completed'
+                          ? 'bg-green-500/10 border-green-500/30'
+                          : status === 'current'
+                          ? 'bg-[#c9a962]/20 border-[#c9a962] ring-2 ring-[#c9a962]/50'
+                          : item.phase === 'handover'
+                          ? 'bg-white/5 border-white/10 hover:border-white/30'
+                          : 'bg-white/5 border-white/10 hover:border-[#c9a962]/30'
+                      }`}
+                    >
+                      {/* Status Badge */}
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          {status === 'completed' && (
+                            <span className="flex items-center gap-1 text-xs font-semibold text-green-400 bg-green-500/20 px-2 py-0.5 rounded-full">
+                              <span className="w-1.5 h-1.5 bg-green-400 rounded-full" />
+                              PAID
+                            </span>
+                          )}
+                          {status === 'current' && (
+                            <span className="flex items-center gap-1 text-xs font-semibold text-[#c9a962] bg-[#c9a962]/20 px-2 py-0.5 rounded-full animate-pulse">
+                              <span className="w-1.5 h-1.5 bg-[#c9a962] rounded-full" />
+                              NEXT
+                            </span>
+                          )}
+                          {status === 'upcoming' && (
+                            <span className="text-xs font-semibold uppercase tracking-wider text-white/40">
+                              {item.phase}
+                            </span>
+                          )}
+                        </div>
+                        <span className={`text-2xl font-bold ${
+                          status === 'completed' ? 'text-green-400' :
+                          status === 'current' ? 'text-[#c9a962]' :
+                          'text-white/60'
+                        }`}>
+                          {item.percentage}%
+                        </span>
+                      </div>
+                      
+                      <p className={`font-semibold mb-1 ${
+                        status === 'completed' ? 'text-green-300' :
+                        status === 'current' ? 'text-white' :
+                        'text-white/80'
                       }`}>
-                        {item.phase}
-                      </span>
-                      <span className={`text-2xl font-bold ${
-                        item.phase === 'handover' ? 'text-white' : 'text-[#c9a962]'
-                      }`}>
-                        {item.percentage}%
-                      </span>
-                    </div>
-                    <p className="text-white font-medium mb-1">{item.milestone}</p>
-                    <p className="text-white/40 text-sm">{item.date}</p>
-                    
-                    {/* Amount based on selected unit */}
-                    <div className="mt-3 pt-3 border-t border-white/10">
-                      <p className="text-white/50 text-xs">Amount</p>
-                      <p className="text-white font-semibold">
-                        {formatCurrency(selectedPrice * (item.percentage / 100))}
+                        {item.milestone}
                       </p>
-                    </div>
+                      <p className="text-white/40 text-sm">{item.date}</p>
+                      
+                      {/* Time Until */}
+                      {status !== 'completed' && (
+                        <div className="mt-2">
+                          <span className={`text-xs ${
+                            status === 'current' ? 'text-[#c9a962]' : 'text-white/30'
+                          }`}>
+                            {status === 'current' ? '⏱ Due in ' : 'In '}{timeUntil}
+                          </span>
+                        </div>
+                      )}
+                      
+                      {/* Amount based on selected unit */}
+                      <div className="mt-3 pt-3 border-t border-white/10">
+                        <p className="text-white/50 text-xs">Amount</p>
+                        <p className={`font-semibold ${
+                          status === 'completed' ? 'text-green-400 line-through opacity-60' :
+                          status === 'current' ? 'text-[#c9a962]' :
+                          'text-white'
+                        }`}>
+                          {formatCurrency(selectedPrice * (item.percentage / 100))}
+                        </p>
+                      </div>
 
-                    {/* Hover indicator */}
-                    <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-hover:text-white/60 transition-all group-hover:translate-x-1" />
-                  </div>
-                ))}
+                      {/* Hover indicator */}
+                      <ChevronRight className={`absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-all group-hover:translate-x-1 ${
+                        status === 'completed' ? 'text-green-500/30 group-hover:text-green-400' :
+                        status === 'current' ? 'text-[#c9a962]/50 group-hover:text-[#c9a962]' :
+                        'text-white/20 group-hover:text-white/60'
+                      }`} />
+                    </div>
+                  );
+                })}
+            </div>
+
+            {/* Summary Stats */}
+            <div className="mt-8 pt-6 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-green-400 text-2xl font-bold">
+                  {formatCurrency(
+                    paymentMilestones
+                      .filter(m => getPaymentStatus(m.dateObj) === 'completed')
+                      .reduce((sum, m) => sum + selectedPrice * (m.percentage / 100), 0)
+                  )}
+                </p>
+                <p className="text-white/40 text-sm">Paid</p>
+              </div>
+              <div>
+                <p className="text-[#c9a962] text-2xl font-bold">
+                  {formatCurrency(
+                    paymentMilestones
+                      .filter(m => getPaymentStatus(m.dateObj) === 'current')
+                      .reduce((sum, m) => sum + selectedPrice * (m.percentage / 100), 0)
+                  )}
+                </p>
+                <p className="text-white/40 text-sm">Next Due</p>
+              </div>
+              <div>
+                <p className="text-white text-2xl font-bold">
+                  {formatCurrency(
+                    paymentMilestones
+                      .filter(m => getPaymentStatus(m.dateObj) === 'upcoming')
+                      .reduce((sum, m) => sum + selectedPrice * (m.percentage / 100), 0)
+                  )}
+                </p>
+                <p className="text-white/40 text-sm">Remaining</p>
+              </div>
             </div>
           </div>
 
