@@ -44,36 +44,38 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-md py-3 shadow-lg'
-          : 'bg-transparent py-6'
+          ? 'bg-[#0a0a0a]/98 backdrop-blur-md py-3 shadow-xl'
+          : 'bg-gradient-to-b from-black/80 to-transparent py-5'
       )}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Image
-              src="/images/sei-logo.png"
-              alt="SEI Saadiyat"
-              width={80}
-              height={40}
-              className="h-8 w-auto"
-            />
-            <div className="hidden md:block h-8 w-px bg-white/30" />
+          <div className="flex items-center gap-5">
+            <div className="relative">
+              <Image
+                src="/images/Main logo.png"
+                alt="SEI Saadiyat"
+                width={52}
+                height={52}
+                className="h-12 w-12 object-contain"
+              />
+            </div>
+            <div className="hidden md:block h-10 w-px bg-white/20" />
             <Image
               src="/images/aldar-logo.webp"
               alt="Aldar Properties"
-              width={80}
-              height={40}
-              className="hidden md:block h-6 w-auto"
+              width={90}
+              height={36}
+              className="hidden md:block h-7 w-auto opacity-90"
             />
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="text-white/90 hover:text-white text-sm font-medium tracking-wide transition-colors"
+                className="text-white/80 hover:text-white text-sm font-medium tracking-wider uppercase transition-colors duration-300"
               >
                 {link.label}
               </button>
@@ -83,9 +85,8 @@ export function Header() {
           <div className="flex items-center gap-4">
             <Button
               onClick={handleRegisterClick}
-              variant="outline"
               size="sm"
-              className="hidden sm:inline-flex"
+              className="hidden sm:inline-flex bg-[#c9a962] hover:bg-[#b8984f] text-black font-semibold tracking-wide"
             >
               Register Interest
             </Button>
@@ -103,18 +104,18 @@ export function Header() {
         </div>
 
         {isMobileMenuOpen && (
-          <nav className="lg:hidden mt-6 pb-6 border-t border-white/20 pt-6">
+          <nav className="lg:hidden mt-6 pb-6 border-t border-white/10 pt-6">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-white/90 hover:text-white text-left py-2"
+                  className="text-white/80 hover:text-white text-left py-2 uppercase text-sm tracking-wider"
                 >
                   {link.label}
                 </button>
               ))}
-              <Button onClick={handleRegisterClick} className="mt-4">
+              <Button onClick={handleRegisterClick} className="mt-4 bg-[#c9a962] hover:bg-[#b8984f] text-black font-semibold">
                 Register Interest
               </Button>
             </div>

@@ -64,14 +64,14 @@ export function UnitTypes() {
 
   return (
     <>
-      <section id="units" ref={trackRef} className="py-20 lg:py-32 bg-white">
+      <section id="units" ref={trackRef} className="py-24 lg:py-32 bg-[#fafafa]">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-amber-700 text-sm tracking-[0.2em] uppercase mb-4">
+            <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
               Residence Collection
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-6">
-              Choose Your Sanctuary
+            <h2 className="text-4xl md:text-5xl text-[#0a0a0a] font-light mb-6">
+              Choose Your <span className="font-semibold">Sanctuary</span>
             </h2>
             <p className="text-gray-600 text-lg">
               From intimate one-bedroom retreats to expansive Kanso residences,
@@ -83,40 +83,40 @@ export function UnitTypes() {
             {units.map((unit, index) => (
               <div
                 key={index}
-                className={`relative bg-stone-50 rounded-lg p-6 lg:p-8 border border-stone-200 hover:border-amber-300 transition-all duration-300 hover:shadow-lg ${
-                  unit.featured ? 'ring-2 ring-amber-500' : ''
+                className={`relative bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 hover:border-[#c9a962]/30 transition-all duration-300 hover:shadow-xl group ${
+                  unit.featured ? 'ring-2 ring-[#c9a962]' : ''
                 }`}
               >
                 {unit.featured && (
-                  <span className="absolute -top-3 left-6 bg-amber-700 text-white text-xs px-3 py-1 rounded-full">
+                  <span className="absolute -top-3 left-6 bg-[#c9a962] text-black text-xs font-semibold px-4 py-1 rounded-full">
                     Premium
                   </span>
                 )}
-                <h3 className="font-serif text-2xl text-gray-900 mb-2">
+                <h3 className="text-2xl font-semibold text-[#0a0a0a] mb-2">
                   {unit.type}
                 </h3>
-                <p className="text-amber-700 text-xl font-medium mb-4">
+                <p className="text-[#c9a962] text-xl font-semibold mb-4">
                   Starting from {unit.startingPrice}
                 </p>
-                <p className="text-gray-600 text-sm mb-6">{unit.description}</p>
+                <p className="text-gray-500 text-sm mb-6">{unit.description}</p>
                 <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <BedDouble className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <BedDouble className="w-4 h-4 text-[#c9a962]" />
                     <span>{unit.bedrooms} Bed</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Bath className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <Bath className="w-4 h-4 text-[#c9a962]" />
                     <span>{unit.bathrooms} Bath</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Maximize className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <Maximize className="w-4 h-4 text-[#c9a962]" />
                     <span>{unit.size.replace('From ', '')}</span>
                   </div>
                 </div>
                 <Button
                   onClick={handleUnlockPricing}
                   variant="secondary"
-                  className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                  className="w-full bg-[#0a0a0a] text-white hover:bg-[#1a1a1a] font-medium"
                 >
                   <Lock className="w-4 h-4 mr-2" />
                   View Full Details
@@ -125,11 +125,15 @@ export function UnitTypes() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <p className="text-gray-500 mb-4">
+          <div className="text-center mt-16">
+            <p className="text-gray-500 mb-6">
               Register to receive detailed floor plans, pricing, and availability.
             </p>
-            <Button onClick={handleUnlockPricing} size="lg">
+            <Button 
+              onClick={handleUnlockPricing} 
+              size="lg"
+              className="bg-[#c9a962] hover:bg-[#b8984f] text-black font-semibold"
+            >
               Unlock Full Pricing
             </Button>
           </div>

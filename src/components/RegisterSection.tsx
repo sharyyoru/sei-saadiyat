@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { RegistrationForm } from './RegistrationForm';
 import { useSectionTracking } from '@/hooks/useTracking';
 
@@ -7,23 +8,40 @@ export function RegisterSection() {
   const trackRef = useSectionTracking('register');
 
   return (
-    <section id="register" ref={trackRef} className="py-20 lg:py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-amber-400 text-sm tracking-[0.2em] uppercase mb-4">
-              Register Your Interest
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
-              Be Among The First
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Register today to receive exclusive pricing, floor plans, and
-              priority access to unit selection at SEI Saadiyat.
-            </p>
-          </div>
-          <div className="bg-white rounded-xl p-8 lg:p-12 shadow-2xl">
-            <RegistrationForm />
+    <section id="register" ref={trackRef} className="py-24 lg:py-32 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a962]/5 to-transparent" />
+      
+      <div className="container mx-auto px-4 relative">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-12 items-center">
+            {/* Left branding */}
+            <div className="lg:col-span-2 text-center lg:text-left">
+              <Image
+                src="/images/Main logo.png"
+                alt="SEI Saadiyat"
+                width={80}
+                height={80}
+                className="w-20 h-20 mx-auto lg:mx-0 mb-6"
+              />
+              <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+                Register Your Interest
+              </p>
+              <h2 className="text-4xl md:text-5xl text-white font-light mb-6">
+                Be Among <span className="font-semibold">The First</span>
+              </h2>
+              <p className="text-white/50 text-lg">
+                Register today to receive exclusive pricing, floor plans, and
+                priority access to unit selection at SEI Saadiyat.
+              </p>
+            </div>
+            
+            {/* Right form */}
+            <div className="lg:col-span-3">
+              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl">
+                <RegistrationForm />
+              </div>
+            </div>
           </div>
         </div>
       </div>

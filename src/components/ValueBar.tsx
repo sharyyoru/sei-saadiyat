@@ -16,21 +16,23 @@ export function ValueBar() {
   return (
     <section
       ref={trackRef}
-      className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 py-8"
+      className="bg-[#0a0a0a] border-y border-white/5 py-10"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="flex items-center justify-center gap-4 text-center md:text-left"
+              className="flex items-center justify-center gap-4 text-center"
             >
-              <stat.icon className="w-8 h-8 text-amber-500 hidden sm:block" />
+              <div className="w-12 h-12 rounded-full bg-[#c9a962]/10 flex items-center justify-center hidden sm:flex">
+                <stat.icon className="w-5 h-5 text-[#c9a962]" />
+              </div>
               <div>
-                <p className="text-2xl md:text-3xl font-serif text-white">
+                <p className="text-2xl md:text-3xl font-semibold text-white">
                   {stat.value}
                 </p>
-                <p className="text-sm text-white/60 tracking-wide">
+                <p className="text-sm text-white/50 tracking-wide">
                   {stat.label}
                 </p>
               </div>
