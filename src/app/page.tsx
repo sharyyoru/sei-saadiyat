@@ -8,6 +8,7 @@ import { PaymentPlan } from "@/components/PaymentPlan";
 import { Location } from "@/components/Location";
 import { Developer } from "@/components/Developer";
 import { FAQ } from "@/components/FAQ";
+import { FeaturedArticles } from "@/components/FeaturedArticles";
 import { RegisterSection } from "@/components/RegisterSection";
 import { Footer } from "@/components/Footer";
 import { TrackingProvider } from "@/components/TrackingProvider";
@@ -114,6 +115,7 @@ export default function Home() {
           <Location />
           <Developer />
           <FAQ />
+          <FeaturedArticles />
           <RegisterSection />
         </main>
         <Footer />

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { blogPosts, getBlogPost, getAllBlogSlugs } from '@/lib/blog-data';
+import { BlogLeadCapture } from '@/components/BlogLeadCapture';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -100,25 +101,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </section>
 
-      {/* Content */}
+      {/* Content with Sidebar */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <article className="max-w-3xl mx-auto">
-            <div 
-              className="prose prose-lg prose-gray max-w-none
-                prose-headings:font-semibold prose-headings:text-[#0a0a0a]
-                prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                prose-p:text-gray-600 prose-p:leading-relaxed
-                prose-strong:text-[#0a0a0a]
-                prose-ul:text-gray-600
-                prose-li:marker:text-[#c9a962]
-                prose-table:text-sm
-                prose-th:bg-[#0a0a0a] prose-th:text-white prose-th:px-4 prose-th:py-2
-                prose-td:border prose-td:px-4 prose-td:py-2"
-              dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
-            />
-          </article>
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-12">
+            {/* Main Content */}
+            <article className="lg:col-span-2">
+              <div 
+                className="prose prose-lg prose-gray max-w-none
+                  prose-headings:font-semibold prose-headings:text-[#0a0a0a]
+                  prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+                  prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                  prose-p:text-gray-600 prose-p:leading-relaxed
+                  prose-strong:text-[#0a0a0a]
+                  prose-ul:text-gray-600
+                  prose-li:marker:text-[#c9a962]
+                  prose-table:text-sm
+                  prose-th:bg-[#0a0a0a] prose-th:text-white prose-th:px-4 prose-th:py-2
+                  prose-td:border prose-td:px-4 prose-td:py-2"
+                dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
+              />
+            </article>
+
+            {/* Sidebar with Lead Capture */}
+            <aside className="lg:col-span-1">
+              <BlogLeadCapture />
+            </aside>
+          </div>
         </div>
       </section>
 
