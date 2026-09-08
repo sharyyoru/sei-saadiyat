@@ -117,7 +117,7 @@ export function Header() {
         </div>
 
         {isMobileMenuOpen && (
-          <nav className="lg:hidden mt-6 pb-6 border-t border-white/10 pt-6">
+          <nav className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a] border-t border-white/10 px-4 py-6 shadow-2xl">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
