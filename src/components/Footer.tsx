@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -50,25 +50,20 @@ export function Footer() {
                   Register Interest
                 </a>
               </li>
+              <li>
+                <a href="/blog" className="hover:text-[#c9a962] transition-colors">
+                  Blog
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-6">Contact</h4>
-            <ul className="space-y-4 text-white/50">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-[#c9a962] flex-shrink-0 mt-0.5" />
-                <span>+971 800 ALDAR (25327)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#c9a962] flex-shrink-0 mt-0.5" />
-                <span>info@aldar.com</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#c9a962] flex-shrink-0 mt-0.5" />
-                <span>Saadiyat Island, Abu Dhabi, UAE</span>
-              </li>
-            </ul>
+            <h4 className="text-lg font-semibold mb-6">Location</h4>
+            <div className="flex items-start gap-3 text-white/50">
+              <MapPin className="w-5 h-5 text-[#c9a962] flex-shrink-0 mt-0.5" />
+              <span>Saadiyat Island, Abu Dhabi, UAE</span>
+            </div>
           </div>
 
           <div>
