@@ -26,6 +26,8 @@ export async function trackEvent(
   eventData?: EventData
 ): Promise<void> {
   try {
+    if (!supabase) return;
+    
     const sessionId = generateSessionId();
     const utmParams = getUTMParams();
 

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 const leadSchema = z.object({
   full_name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -47,6 +49,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
         { status: 429 }
+      );
+    }
+
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 503 }
       );
     }
 
