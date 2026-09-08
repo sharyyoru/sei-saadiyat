@@ -69,18 +69,24 @@ export function Developer() {
           </div>
           
           <div className="relative">
-            <div className="aspect-[4/3] bg-[#0a0a0a] rounded-2xl flex items-center justify-center overflow-hidden p-12">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="/images/sei_saadiyat_logo_light_en.webp"
-                alt="SEI Saadiyat"
-                width={400}
-                height={150}
-                className="object-contain w-full max-w-sm"
+                src="/images/sei-exterior-1.jpeg"
+                alt="SEI Saadiyat Development"
+                fill
+                className="object-cover"
               />
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a962]/10 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <p className="text-white/40 text-sm text-center">
+              {/* Overlay with logo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <Image
+                  src="/images/sei_saadiyat_logo_light_en.webp"
+                  alt="SEI Saadiyat"
+                  width={140}
+                  height={50}
+                  className="h-8 w-auto mb-2"
+                />
+                <p className="text-white/60 text-sm">
                   静 • Stillness and Calm
                 </p>
               </div>

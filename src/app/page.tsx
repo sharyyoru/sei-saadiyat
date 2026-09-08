@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { ValueBar } from "@/components/ValueBar";
 import { AboutSection } from "@/components/AboutSection";
 import { UnitTypes } from "@/components/UnitTypes";
+import { Gallery } from "@/components/Gallery";
 import { PaymentPlan } from "@/components/PaymentPlan";
 import { Location } from "@/components/Location";
 import { Developer } from "@/components/Developer";
@@ -108,6 +109,7 @@ export default function Home() {
           <ValueBar />
           <AboutSection />
           <UnitTypes />
+          <Gallery />
           <PaymentPlan />
           <Location />
           <Developer />
