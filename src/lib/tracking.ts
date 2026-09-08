@@ -80,7 +80,17 @@ export function trackFormStart(): void {
   trackEvent('form_start');
 }
 
+declare global {
+  interface Window {
+    oaiq?: (action: string, event: string, data?: Record<string, unknown>) => void;
+  }
+}
+
 export function trackFormSubmit(success: boolean): void {
+  // Track lead_created event for OpenAI pixel
+  if (success && typeof window !== 'undefined' && window.oaiq) {
+    window.oaiq('measure', 'lead_created', { type: 'customer_action' });
+  }
   trackEvent('form_submit', { success });
 }
 
