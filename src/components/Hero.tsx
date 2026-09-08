@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useVideoTracking } from '@/hooks/useVideoTracking';
 import { trackCTAClick } from '@/lib/tracking';
@@ -92,13 +92,14 @@ export function Hero() {
               {/* Video overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
               
-              {/* Play indicator */}
-              <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <span className="text-white/80 text-sm font-medium">Watch Video</span>
-              </div>
+              {/* Register CTA */}
+              <button 
+                onClick={handleRegisterClick}
+                className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-2 bg-[#c9a962] hover:bg-[#b8984f] text-black font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Register Your Interest
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
 
             {/* Decorative elements */}
