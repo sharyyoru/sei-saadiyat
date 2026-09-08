@@ -54,15 +54,15 @@ export function AboutSection() {
           <div className="order-1 lg:order-2 relative">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/gallery-1.jpg"
-                alt="SEI Saadiyat Interior"
+                src="/images/sei-interior-1.jpeg"
+                alt="SEI Saadiyat Interior - Simplicity by Design"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="absolute -bottom-4 -left-4 lg:-bottom-6 lg:-left-6 bg-[#0a0a0a] text-white p-6 rounded-xl shadow-xl">
-              <p className="text-3xl font-semibold">2030</p>
+              <p className="text-3xl font-semibold">Q4 2030</p>
               <p className="text-sm text-white/60 tracking-wide">Expected Handover</p>
             </div>
           </div>
