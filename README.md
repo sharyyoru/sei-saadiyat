@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SEI Saadiyat Landing Page
+
+A high-converting, SEO-optimized landing page for SEI Saadiyat luxury residences by Aldar Properties.
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL)
+- **Deployment**: Vercel
+
+## Features
+
+- Responsive luxury design optimized for conversions
+- Lead capture with detailed investor profiling
+- User action tracking (page views, scroll depth, video engagement, CTA clicks)
+- SEO optimized with JSON-LD structured data
+- AEO optimized with FAQ schema
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set Up Environment Variables
+
+Create a `.env.local` file with your Supabase credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
+
+### 3. Set Up Supabase Database
+
+Run the SQL schema in your Supabase SQL Editor:
+
+```bash
+# Copy contents of supabase-schema.sql and run in Supabase Dashboard > SQL Editor
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Deploy to Vercel
 
-## Learn More
+1. Push to GitHub
+2. Connect repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── leads/route.ts      # Lead submission endpoint
+│   │   └── events/route.ts     # Event tracking endpoint
+│   ├── layout.tsx              # Root layout with SEO metadata
+│   ├── page.tsx                # Main landing page
+│   ├── sitemap.ts              # Auto-generated sitemap
+│   └── robots.ts               # Robots.txt configuration
+├── components/
+│   ├── ui/                     # Reusable UI components
+│   ├── Header.tsx
+│   ├── Hero.tsx
+│   ├── ValueBar.tsx
+│   ├── AboutSection.tsx
+│   ├── UnitTypes.tsx
+│   ├── PaymentPlan.tsx
+│   ├── Location.tsx
+│   ├── Developer.tsx
+│   ├── FAQ.tsx
+│   ├── RegisterSection.tsx
+│   ├── RegistrationForm.tsx
+│   └── Footer.tsx
+├── hooks/
+│   ├── useTracking.ts          # Page and scroll tracking
+│   └── useVideoTracking.ts     # Video engagement tracking
+└── lib/
+    ├── supabase.ts             # Supabase client
+    ├── tracking.ts             # Event tracking functions
+    └── utils.ts                # Utility functions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Analytics
 
-## Deploy on Vercel
+All user actions are tracked in the Supabase `events` table:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `page_view` - Page loads
+- `scroll_depth` - 25%, 50%, 75%, 100% milestones
+- `video_play`, `video_progress`, `video_complete` - Video engagement
+- `cta_click` - Button clicks
+- `form_start`, `form_submit` - Form interactions
+- `section_view` - Section visibility
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Private - Aldar Properties

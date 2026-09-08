@@ -1,69 +1,120 @@
-import Image from "next/image";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { ValueBar } from "@/components/ValueBar";
+import { AboutSection } from "@/components/AboutSection";
+import { UnitTypes } from "@/components/UnitTypes";
+import { PaymentPlan } from "@/components/PaymentPlan";
+import { Location } from "@/components/Location";
+import { Developer } from "@/components/Developer";
+import { FAQ } from "@/components/FAQ";
+import { RegisterSection } from "@/components/RegisterSection";
+import { Footer } from "@/components/Footer";
+import { TrackingProvider } from "@/components/TrackingProvider";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateListing",
+      name: "SEI Saadiyat",
+      description:
+        "778 luxury residences across 6 towers on Saadiyat Island, Abu Dhabi by Aldar Properties.",
+      url: "https://sei-saadiyat.com",
+      image: "https://sei-saadiyat.com/images/og-image.jpg",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Abu Dhabi",
+        addressRegion: "Abu Dhabi",
+        addressCountry: "AE",
+        streetAddress: "Saadiyat Island",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "24.5333",
+        longitude: "54.4333",
+      },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "AED",
+        price: "2950000",
+        priceValidUntil: "2025-12-31",
+        availability: "https://schema.org/PreOrder",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "Aldar Properties",
+      url: "https://www.aldar.com",
+      logo: "https://sei-saadiyat.com/images/aldar-logo.webp",
+      description: "Abu Dhabi's leading real estate developer",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Abu Dhabi",
+        addressCountry: "AE",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is the starting price for SEI Saadiyat?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Prices at SEI Saadiyat start from AED 2.95 million for a 1-bedroom residence.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What payment plan options are available?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "SEI Saadiyat offers an attractive 50/50 payment plan. Pay 50% during construction and 50% on handover.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Where is SEI Saadiyat located?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "SEI Saadiyat is located on Saadiyat Island, Abu Dhabi's premier cultural and lifestyle destination.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can foreign nationals buy property at SEI Saadiyat?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, Saadiyat Island is a designated freehold area where foreign nationals can purchase property with full ownership rights.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <TrackingProvider>
+        <Header />
+        <main>
+          <Hero />
+          <ValueBar />
+          <AboutSection />
+          <UnitTypes />
+          <PaymentPlan />
+          <Location />
+          <Developer />
+          <FAQ />
+          <RegisterSection />
+        </main>
+        <Footer />
+      </TrackingProvider>
+    </>
   );
 }
