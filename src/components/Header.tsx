@@ -53,11 +53,11 @@ export function Header() {
           <div className="flex items-center gap-5">
             <div className="relative">
               <Image
-                src="/images/Main logo.png"
+                src="/images/sei_saadiyat_logo_light_en.webp"
                 alt="SEI Saadiyat"
-                width={52}
-                height={52}
-                className="h-12 w-12 object-contain"
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain"
               />
             </div>
             <div className="hidden md:block h-10 w-px bg-white/20" />

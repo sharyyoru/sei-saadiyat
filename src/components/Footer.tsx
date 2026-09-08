@@ -10,11 +10,11 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <Image
-              src="/images/Main logo.png"
+              src="/images/sei_saadiyat_logo_light_en.webp"
               alt="SEI Saadiyat"
-              width={64}
-              height={64}
-              className="mb-6 w-16 h-16"
+              width={140}
+              height={50}
+              className="mb-6 h-10 w-auto"
             />
             <p className="text-white/50 text-sm leading-relaxed">
               SEI Saadiyat by Aldar - A sanctuary of refined living on Abu

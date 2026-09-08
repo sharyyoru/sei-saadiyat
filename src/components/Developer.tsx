@@ -69,13 +69,13 @@ export function Developer() {
           </div>
           
           <div className="relative">
-            <div className="aspect-square bg-[#0a0a0a] rounded-2xl flex items-center justify-center overflow-hidden">
+            <div className="aspect-[4/3] bg-[#0a0a0a] rounded-2xl flex items-center justify-center overflow-hidden p-12">
               <Image
-                src="/images/Main logo.png"
+                src="/images/sei_saadiyat_logo_light_en.webp"
                 alt="SEI Saadiyat"
-                width={300}
-                height={300}
-                className="object-contain"
+                width={400}
+                height={150}
+                className="object-contain w-full max-w-sm"
               />
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a962]/10 to-transparent" />

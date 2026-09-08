@@ -18,11 +18,11 @@ export function RegisterSection() {
             {/* Left branding */}
             <div className="lg:col-span-2 text-center lg:text-left">
               <Image
-                src="/images/Main logo.png"
+                src="/images/sei_saadiyat_logo_light_en.webp"
                 alt="SEI Saadiyat"
-                width={80}
-                height={80}
-                className="w-20 h-20 mx-auto lg:mx-0 mb-6"
+                width={160}
+                height={60}
+                className="h-12 w-auto mx-auto lg:mx-0 mb-6"
               />
               <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
                 Register Your Interest
