@@ -1,12 +1,14 @@
 'use client';
 
-import { Building2, Home, MapPin, Wallet } from 'lucide-react';
+import { Building2, Home, Maximize, Wallet, Calendar, Percent } from 'lucide-react';
 import { useSectionTracking } from '@/hooks/useTracking';
 
 const stats = [
-  { icon: Building2, value: '6', label: 'Residential Towers' },
-  { icon: Home, value: '778', label: 'Exclusive Residences' },
-  { icon: MapPin, value: 'Saadiyat', label: 'Island Location' },
+  { icon: Building2, value: '6', label: 'Towers' },
+  { icon: Home, value: '778', label: 'Homes' },
+  { icon: Maximize, value: '70-208', label: 'm² sizes' },
+  { icon: Calendar, value: 'Q4 2030', label: 'Handover' },
+  { icon: Percent, value: '5%', label: 'Down Payment' },
   { icon: Wallet, value: '50/50', label: 'Payment Plan' },
 ];
 
@@ -19,7 +21,7 @@ export function ValueBar() {
       className="bg-[#0a0a0a] border-y border-white/5 py-10"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}

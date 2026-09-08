@@ -1,69 +1,89 @@
 'use client';
 
 import Image from 'next/image';
-import { Award, Building2, Globe, TrendingUp } from 'lucide-react';
+import { Building2, Home, Award, Leaf } from 'lucide-react';
 import { useSectionTracking } from '@/hooks/useTracking';
 
 const achievements = [
   { icon: Building2, value: '85+', label: 'Projects Delivered' },
-  { icon: Globe, value: '100K+', label: 'Residents Housed' },
-  { icon: Award, value: '#1', label: 'Developer in Abu Dhabi' },
-  { icon: TrendingUp, value: '25+', label: 'Years of Excellence' },
+  { icon: Home, value: '100K+', label: 'Residents Housed' },
+  { icon: Award, value: '#1', label: 'Abu Dhabi Developer' },
+  { icon: Leaf, value: 'Pearl 3', label: 'Estidama Target' },
+];
+
+const partners = [
+  { name: 'Jacobs', role: 'Architecture' },
+  { name: 'Kettle Collective', role: 'Interior Design' },
 ];
 
 export function Developer() {
   const trackRef = useSectionTracking('developer');
 
   return (
-    <section ref={trackRef} className="py-20 lg:py-32 bg-white">
+    <section ref={trackRef} className="py-24 lg:py-32 bg-[#fafafa]">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <p className="text-amber-700 text-sm tracking-[0.2em] uppercase mb-4">
+            <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
               Developed By
             </p>
             <Image
               src="/images/aldar-logo.webp"
               alt="Aldar Properties"
-              width={180}
-              height={60}
+              width={160}
+              height={50}
               className="mb-6"
             />
-            <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-6">
-              Abu Dhabi&apos;s Leading Real Estate Developer
+            <h2 className="text-3xl md:text-4xl text-[#0a0a0a] font-light mb-6">
+              Abu Dhabi&apos;s <span className="font-semibold">Leading Developer</span>
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              Aldar Properties is the leading real estate developer in Abu
-              Dhabi, with a diversified and sustainable operating model centered
-              around two core businesses: Aldar Development and Aldar
-              Investment. With a reputation for delivering iconic destinations,
-              Aldar continues to shape the urban landscape of the UAE.
+              Aldar Properties is the leading real estate developer in Abu Dhabi, 
+              with a reputation for delivering iconic destinations. In line with 
+              Aldar&apos;s sustainable building practices, Sei Saadiyat is targeting 
+              Estidama Pearl 3, with smart community features and EV provisions.
             </p>
-            <div className="grid grid-cols-2 gap-6">
+            
+            {/* Achievement Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
               {achievements.map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-amber-700" />
-                  </div>
+                <div key={index} className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                  <item.icon className="w-5 h-5 text-[#c9a962] mx-auto mb-2" />
+                  <p className="text-xl font-bold text-[#0a0a0a]">{item.value}</p>
+                  <p className="text-xs text-gray-500">{item.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Design Partners */}
+            <div className="flex flex-wrap gap-4">
+              {partners.map((partner, index) => (
+                <div key={index} className="flex items-center gap-3 bg-[#0a0a0a] text-white px-4 py-3 rounded-lg">
                   <div>
-                    <p className="text-2xl font-serif text-gray-900">
-                      {item.value}
-                    </p>
-                    <p className="text-sm text-gray-500">{item.label}</p>
+                    <p className="font-semibold">{partner.name}</p>
+                    <p className="text-xs text-white/60">{partner.role}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+          
           <div className="relative">
-            <div className="aspect-square bg-gradient-to-br from-amber-100 to-stone-200 rounded-lg flex items-center justify-center">
+            <div className="aspect-square bg-[#0a0a0a] rounded-2xl flex items-center justify-center overflow-hidden">
               <Image
-                src="/images/sei-brand.png"
-                alt="SEI by Aldar"
-                width={400}
-                height={400}
-                className="object-contain p-8"
+                src="/images/Main logo.png"
+                alt="SEI Saadiyat"
+                width={300}
+                height={300}
+                className="object-contain"
               />
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a962]/10 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <p className="text-white/40 text-sm text-center">
+                  静 • Stillness and Calm
+                </p>
+              </div>
             </div>
           </div>
         </div>

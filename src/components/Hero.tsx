@@ -34,9 +34,13 @@ export function Hero() {
               <span className="font-semibold text-[#c9a962]">Stillness</span>
             </h1>
             
-            <p className="text-white/60 text-lg md:text-xl leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              An exclusive collection of 778 residences across 6 towers by Aldar, 
-              where modern luxury meets timeless serenity.
+            <p className="text-white/60 text-lg md:text-xl leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0">
+              <span className="text-white/80 italic">Sei</span> — stillness and calm in Japanese. 
+              778 homes across six towers in Saadiyat Cultural District, shaped by balance, 
+              simplicity, and restorative living.
+            </p>
+            <p className="text-white/40 text-sm mb-8 max-w-xl mx-auto lg:mx-0">
+              Architecture by Jacobs • Interiors by Kettle Collective • Estidama Pearl 3
             </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 mb-10">

@@ -10,36 +10,36 @@ import { trackCTAClick } from '@/lib/tracking';
 
 const units = [
   {
-    type: '1-Bedroom',
+    type: '1-Bedroom Apartment',
     startingPrice: 'AED 2.95M',
     bedrooms: 1,
     bathrooms: 1,
-    size: 'From 750 sq.ft',
-    description: 'Perfect for professionals and investors seeking prime Saadiyat address.',
+    size: '70 m²',
+    description: 'Thoughtfully designed spaces with natural light and calm interiors.',
   },
   {
-    type: '2-Bedroom',
+    type: '2-Bedroom Apartment',
     startingPrice: 'AED 4.5M',
     bedrooms: 2,
     bathrooms: 2,
-    size: 'From 1,200 sq.ft',
-    description: 'Spacious layouts ideal for couples and small families.',
+    size: '120 m²',
+    description: 'Spacious layouts balancing minimalism with warmth and character.',
   },
   {
-    type: '2-Bedroom + Maid',
+    type: '2-Bed + Maid\'s Room',
     startingPrice: 'AED 5.4M',
     bedrooms: 2,
     bathrooms: 3,
-    size: 'From 1,450 sq.ft',
-    description: 'Enhanced living with dedicated staff quarters.',
+    size: '145 m²',
+    description: 'Enhanced living with dedicated staff quarters and flexible spaces.',
   },
   {
     type: '3-Bed Kanso Residence',
     startingPrice: 'AED 8.4M',
     bedrooms: 3,
     bathrooms: 4,
-    size: 'From 2,100 sq.ft',
-    description: 'Premium residence with study room and maid\'s quarters.',
+    size: '208 m²',
+    description: 'Signature residences shaped by stillness, space and natural materials.',
     featured: true,
   },
   {
@@ -47,8 +47,8 @@ const units = [
     startingPrice: 'AED 7.5M',
     bedrooms: 2,
     bathrooms: 3,
-    size: 'From 1,800 sq.ft',
-    description: 'Duplex living with dramatic double-height spaces.',
+    size: '180 m²',
+    description: 'Double-height living with elevated bedrooms and expansive windows.',
     featured: true,
   },
 ];
@@ -68,14 +68,14 @@ export function UnitTypes() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              Residence Collection
+              Simplicity by Design
             </p>
             <h2 className="text-4xl md:text-5xl text-[#0a0a0a] font-light mb-6">
-              Choose Your <span className="font-semibold">Sanctuary</span>
+              Homes That Let <span className="font-semibold">Life Breathe</span>
             </h2>
             <p className="text-gray-600 text-lg">
-              From intimate one-bedroom retreats to expansive Kanso residences,
-              each home is designed for those who appreciate the art of living well.
+              From 1-bedroom apartments to signature Kanso Lofts, each residence 
+              reflects a design philosophy that finds beauty in balance and imperfection.
             </p>
           </div>
 

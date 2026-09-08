@@ -21,26 +21,25 @@ export function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="order-2 lg:order-1">
             <p className="text-[#c9a962] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              The Development
+              Homes That Let Life Breathe
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#0a0a0a] font-light mb-6 leading-tight">
-              A Sanctuary of
+              A Balance of
               <br />
-              <span className="font-semibold">Refined Living</span>
+              <span className="font-semibold">Space & Light</span>
             </h2>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed mb-8">
               <p>
-                SEI Saadiyat is a masterfully designed residential development
-                on Abu Dhabi&apos;s most coveted island. Comprising 6 elegant towers
-                with 778 meticulously crafted residences, SEI offers an
-                unparalleled lifestyle where modern luxury meets natural
-                serenity.
+                At Sei Saadiyat, stillness becomes part of everyday life. Set within 
+                Saadiyat Cultural District, the collection includes 1 and 2-bedroom 
+                apartments, signature 3-bedroom Kanso Residences, and 2-bedroom Kanso Lofts 
+                with double-height living spaces.
               </p>
               <p>
-                Nestled on Saadiyat Island, residents enjoy proximity to
-                world-class cultural institutions including the Louvre Abu
-                Dhabi, pristine beaches, and championship golf courses—all while
-                being minutes from the heart of Abu Dhabi.
+                Thoughtful architecture by <strong>Jacobs</strong>, warm interiors by <strong>Kettle 
+                Collective</strong>, landscaped spaces and open views create a sense of calm, 
+                balance and ease. Residents enjoy proximity to the Louvre Abu Dhabi, 
+                upcoming Guggenheim Abu Dhabi, and Zayed National Museum.
               </p>
             </div>
             <Button 
