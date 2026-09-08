@@ -50,23 +50,26 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <section className="bg-[#0a0a0a] pt-32 pb-16">
+      <section className="bg-[#0a0a0a] pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <Link 
-              href="/blog"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Link>
-            <span className="inline-block bg-[#c9a962] text-black text-xs font-semibold px-3 py-1 rounded-full mb-4">
-              {post.category}
-            </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl text-white font-light leading-tight mb-6">
+            <div className="flex items-center gap-4 mb-8">
+              <Link 
+                href="/blog"
+                className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Blog
+              </Link>
+              <span className="text-white/20">|</span>
+              <span className="bg-[#c9a962] text-black text-xs font-semibold px-3 py-1 rounded-full">
+                {post.category}
+              </span>
+            </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl text-white font-light leading-tight mb-8">
               {post.title}
             </h1>
-            <div className="flex items-center gap-6 text-white/60">
+            <div className="flex items-center gap-6 text-white/50 text-sm">
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 {new Date(post.date).toLocaleDateString('en-US', { 
@@ -108,17 +111,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Main Content */}
             <article className="lg:col-span-2">
               <div 
-                className="prose prose-lg prose-gray max-w-none
-                  prose-headings:font-semibold prose-headings:text-[#0a0a0a]
-                  prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-                  prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                  prose-p:text-gray-600 prose-p:leading-relaxed
-                  prose-strong:text-[#0a0a0a]
-                  prose-ul:text-gray-600
-                  prose-li:marker:text-[#c9a962]
-                  prose-table:text-sm
-                  prose-th:bg-[#0a0a0a] prose-th:text-white prose-th:px-4 prose-th:py-2
-                  prose-td:border prose-td:px-4 prose-td:py-2"
+                className="max-w-none"
                 dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
               />
             </article>
@@ -190,24 +183,107 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 }
 
 function formatContent(content: string): string {
-  return content
-    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^\- (.*$)/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^\|(.+)\|$/gm, (match) => {
-      const cells = match.split('|').filter(c => c.trim());
-      if (cells.some(c => c.includes('---'))) return '';
-      const isHeader = cells.every(c => !c.includes('✓') && !c.includes('AED'));
-      const tag = isHeader ? 'th' : 'td';
-      return `<tr>${cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('')}</tr>`;
-    })
-    .replace(/(<tr>.*<\/tr>\n?)+/g, '<table><tbody>$&</tbody></table>')
-    .replace(/^(?!<[huplt])/gm, '<p>')
-    .replace(/(?<![>])$/gm, '</p>')
-    .replace(/<p><\/p>/g, '')
-    .replace(/<p>(<[hut])/g, '$1')
-    .replace(/(<\/[hut][^>]*>)<\/p>/g, '$1');
+  // Split content into lines for processing
+  const lines = content.trim().split('\n');
+  let html = '';
+  let inList = false;
+  let inTable = false;
+  let tableRows: string[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
+    
+    // Skip empty lines
+    if (!line) {
+      if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+      continue;
+    }
+
+    // Headers
+    if (line.startsWith('## ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<h2 class="text-2xl font-semibold text-[#0a0a0a] mt-12 mb-6 pb-3 border-b border-gray-100">${line.slice(3)}</h2>`;
+      continue;
+    }
+    if (line.startsWith('### ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<h3 class="text-xl font-semibold text-[#0a0a0a] mt-8 mb-4">${line.slice(4)}</h3>`;
+      continue;
+    }
+
+    // Tables
+    if (line.startsWith('|') && line.endsWith('|')) {
+      if (line.includes('---')) continue; // Skip separator row
+      
+      if (!inTable) {
+        inTable = true;
+        tableRows = [];
+      }
+      tableRows.push(line);
+      
+      // Check if next line is not a table
+      const nextLine = lines[i + 1]?.trim() || '';
+      if (!nextLine.startsWith('|') || !nextLine.endsWith('|') || nextLine.includes('---')) {
+        if (lines[i + 1]?.includes('---')) continue;
+      }
+      if (!lines[i + 1]?.trim().startsWith('|')) {
+        // Render table
+        html += '<div class="overflow-x-auto my-8"><table class="w-full border-collapse rounded-lg overflow-hidden">';
+        tableRows.forEach((row, idx) => {
+          const cells = row.split('|').filter(c => c.trim());
+          const tag = idx === 0 ? 'th' : 'td';
+          const bgClass = idx === 0 ? 'bg-[#0a0a0a] text-white' : idx % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+          html += `<tr class="${bgClass}">`;
+          cells.forEach(cell => {
+            html += `<${tag} class="px-4 py-3 text-left border-b border-gray-100">${cell.trim()}</${tag}>`;
+          });
+          html += '</tr>';
+        });
+        html += '</table></div>';
+        inTable = false;
+        tableRows = [];
+      }
+      continue;
+    }
+
+    // List items
+    if (line.startsWith('- ')) {
+      if (!inList) {
+        html += '<ul class="space-y-3 my-6">';
+        inList = true;
+      }
+      const listContent = line.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#0a0a0a]">$1</strong>');
+      html += `<li class="flex gap-3 text-gray-600"><span class="text-[#c9a962] mt-1.5">•</span><span>${listContent}</span></li>`;
+      continue;
+    }
+
+    // Numbered list
+    if (/^\d+\.\s/.test(line)) {
+      if (!inList) {
+        html += '<ol class="space-y-3 my-6 list-decimal list-inside">';
+        inList = true;
+      }
+      const listContent = line.replace(/^\d+\.\s/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#0a0a0a]">$1</strong>');
+      html += `<li class="text-gray-600">${listContent}</li>`;
+      continue;
+    }
+
+    // Close list if open
+    if (inList) {
+      html += '</ul>';
+      inList = false;
+    }
+
+    // Regular paragraph with bold text support
+    line = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#0a0a0a] font-semibold">$1</strong>');
+    html += `<p class="text-gray-600 leading-relaxed mb-6">${line}</p>`;
+  }
+
+  // Close any open tags
+  if (inList) html += '</ul>';
+
+  return html;
 }

@@ -1,22 +1,27 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/Button';
 import { cn } from '@/lib/utils';
 import { trackCTAClick } from '@/lib/tracking';
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#units', label: 'Residences' },
-  { href: '#payment', label: 'Payment Plan' },
-  { href: '#location', label: 'Location' },
+  { href: 'about', label: 'About' },
+  { href: 'units', label: 'Residences' },
+  { href: 'payment', label: 'Payment Plan' },
+  { href: 'location', label: 'Location' },
 ];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,14 +34,22 @@ export function Header() {
 
   const handleRegisterClick = () => {
     trackCTAClick('header_register', 'header');
-    const form = document.getElementById('register');
-    form?.scrollIntoView({ behavior: 'smooth' });
+    if (isHomePage) {
+      const form = document.getElementById('register');
+      form?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#register');
+    }
   };
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (isHomePage) {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push(`/#${sectionId}`);
+    }
   };
 
   return (
@@ -51,7 +64,7 @@ export function Header() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <div className="relative">
+            <Link href="/" className="relative">
               <Image
                 src="/images/sei_saadiyat_logo_light_en.webp"
                 alt="SEI Saadiyat"
@@ -59,7 +72,7 @@ export function Header() {
                 height={40}
                 className="h-8 w-auto object-contain"
               />
-            </div>
+            </Link>
             <div className="hidden md:block h-10 w-px bg-white/20" />
             <Image
               src="/images/aldar-logo.webp"
