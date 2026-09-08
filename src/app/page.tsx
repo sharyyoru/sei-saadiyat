@@ -10,6 +10,7 @@ import { FAQ } from "@/components/FAQ";
 import { RegisterSection } from "@/components/RegisterSection";
 import { Footer } from "@/components/Footer";
 import { TrackingProvider } from "@/components/TrackingProvider";
+import { MobileCTA } from "@/components/MobileCTA";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -114,6 +115,7 @@ export default function Home() {
           <RegisterSection />
         </main>
         <Footer />
+        <MobileCTA />
       </TrackingProvider>
     </>
   );
