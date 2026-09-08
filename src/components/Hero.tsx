@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
 import { ArrowRight, Play } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useVideoTracking } from '@/hooks/useVideoTracking';
@@ -96,17 +95,6 @@ export function Hero() {
                 </div>
                 <span className="text-white/80 text-sm font-medium">Watch Video</span>
               </div>
-
-              {/* Logo overlay */}
-              <div className="absolute top-6 right-6">
-                <Image
-                  src="/images/Main logo.png"
-                  alt="SEI"
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 opacity-80"
-                />
-              </div>
             </div>
 
             {/* Decorative elements */}
@@ -115,9 +103,55 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Background pattern */}
-      <div className="absolute inset-0 -z-10 opacity-30">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a962]/5 to-transparent" />
+      {/* Abu Dhabi Skyline Background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0f1419] to-[#0a0a0a]" />
+        
+        {/* Subtle skyline silhouette effect */}
+        <div className="absolute bottom-0 left-0 right-0 h-[40%]">
+          <svg 
+            viewBox="0 0 1440 400" 
+            className="absolute bottom-0 w-full h-full opacity-[0.08]"
+            preserveAspectRatio="xMidYMax slice"
+          >
+            {/* Stylized Abu Dhabi skyline */}
+            <path 
+              d="M0,400 L0,280 L60,280 L60,200 L80,200 L80,180 L100,180 L100,200 L120,200 L120,280 
+                 L180,280 L180,220 L200,220 L200,150 L210,150 L210,120 L220,120 L220,100 L240,100 L240,120 L250,120 L250,150 L260,150 L260,220 L280,220 L280,280
+                 L340,280 L340,240 L360,240 L360,180 L380,180 L380,160 L400,160 L400,180 L420,180 L420,240 L440,240 L440,280
+                 L500,280 L500,200 L520,200 L520,140 L540,140 L540,80 L560,80 L560,60 L580,60 L580,80 L600,80 L600,140 L620,140 L620,200 L640,200 L640,280
+                 L700,280 L700,220 L720,220 L720,280
+                 L780,280 L780,160 L800,160 L800,100 L820,100 L820,60 L850,40 L880,60 L880,100 L900,100 L900,160 L920,160 L920,280
+                 L980,280 L980,200 L1000,200 L1000,280
+                 L1060,280 L1060,180 L1080,180 L1080,120 L1100,120 L1100,80 L1120,80 L1120,120 L1140,120 L1140,180 L1160,180 L1160,280
+                 L1220,280 L1220,240 L1240,240 L1240,280
+                 L1300,280 L1300,220 L1320,220 L1320,180 L1340,180 L1340,220 L1360,220 L1360,280
+                 L1440,280 L1440,400 Z"
+              fill="url(#skylineGradient)"
+            />
+            <defs>
+              <linearGradient id="skylineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#c9a962" />
+                <stop offset="100%" stopColor="#0a0a0a" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        
+        {/* Ambient glow effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#c9a962]/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#c9a962]/3 rounded-full blur-[100px]" />
+        
+        {/* Subtle grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(201,169,98,0.3) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(201,169,98,0.3) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }}
+        />
       </div>
     </section>
   );
